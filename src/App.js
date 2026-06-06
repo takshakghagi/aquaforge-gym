@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 
 const L = {
   lightest: "#A7EBF2",
@@ -71,7 +71,7 @@ export default function GymLuna() {
   const [activeTesti, setActiveTesti] = useState(0);
   const [form, setForm] = useState({ name: "", email: "", phone: "", goal: "" });
   const [submitted, setSubmitted] = useState(false);
-  const [count, setCount] = useState([0, 0, 0, 0]);
+
 
   useEffect(() => {
     const onScroll = () => setScrollY(window.scrollY);
