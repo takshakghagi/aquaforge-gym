@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const L = {
   lightest: "#A7EBF2",
@@ -71,7 +71,7 @@ export default function GymLuna() {
   const [activeTesti, setActiveTesti] = useState(0);
   const [form, setForm] = useState({ name: "", email: "", phone: "", goal: "" });
   const [submitted, setSubmitted] = useState(false);
-
+  const [count, setCount] = useState([0, 0, 0, 0]);
 
   useEffect(() => {
     const onScroll = () => setScrollY(window.scrollY);
@@ -439,11 +439,24 @@ export default function GymLuna() {
 
       {/* FOOTER */}
       <footer style={{ background: `rgba(1,20,48,1)`, borderTop: `1px solid rgba(84,172,191,0.12)`, padding: "64px 5% 32px" }}>
-        <div className="footer-grid" style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr", gap: 48, marginBottom: 48 }}>
-          <div>
+        <style>{`
+          .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+          .footer-bottom { border-top: 1px solid rgba(84,172,191,0.08); padding-top: 28px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+          @media (max-width: 768px) {
+            .footer-top { grid-template-columns: 1fr 1fr !important; gap: 32px !important; }
+            .footer-brand { grid-column: 1 / -1; }
+            .footer-bottom { flex-direction: column; text-align: center; align-items: center; gap: 20px; }
+          }
+          @media (max-width: 480px) {
+            .footer-top { grid-template-columns: 1fr !important; }
+          }
+        `}</style>
+
+        <div className="footer-top">
+          <div className="footer-brand">
             <div className="orb" style={{ fontSize: 28, letterSpacing: 6, marginBottom: 14, color: L.white }}>AQUAFORGE</div>
             <p style={{ color: L.mist, fontSize: 13, lineHeight: 1.9, maxWidth: 270, fontWeight: 300 }}>Pune's premier aqua-fitness and strength training facility. Where champions are forged.</p>
-            <div style={{ display: "flex", gap: 10, marginTop: 20 }}>
+            <div style={{ display: "flex", gap: 10, marginTop: 20, flexWrap: "wrap" }}>
               {["📱", "📸", "▶️", "💼"].map((icon, i) => (
                 <div key={i} style={{ width: 38, height: 38, background: `rgba(38,101,140,0.2)`, border: `1px solid rgba(84,172,191,0.2)`, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", fontSize: 15, transition: "all 0.3s" }}>{icon}</div>
               ))}
@@ -464,7 +477,7 @@ export default function GymLuna() {
           ))}
         </div>
 
-        <div style={{ borderTop: `1px solid rgba(84,172,191,0.08)`, paddingTop: 28, display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 16 }}>
+        <div className="footer-bottom">
           <div style={{ color: L.mist, fontSize: 12, letterSpacing: 1 }}>© 2025 AquaForge Gym. All rights reserved.</div>
           <div style={{ textAlign: "center" }}>
             <div style={{ color: `rgba(123,184,200,0.5)`, fontSize: 10, letterSpacing: 3, textTransform: "uppercase" }}>Designed & Developed by</div>
